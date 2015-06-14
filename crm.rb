@@ -70,8 +70,27 @@ class CRM
   end
 
   def edit_contact
-    puts "Editing a contact"
+    puts "Which attribute would you like to edit?"
+    puts "[1] First Name"
+    puts "[2] Last Name"
+    puts "[3] E-mail"
+    puts "[4] Notes"
+    puts "[5] Back to Main Menu"
   end
+
+  def edit_contact_choice(attribute_edit)
+  case attribute_edit
+  when 1 then edit_first_name
+  when 2 then edit_last_name
+  when 3 then edit_email
+  when 4 then edit_notes
+  when 5 then main_menu
+    else
+      puts "Dave, you don't know what you're doing."
+    end
+  end
+
+
 
   def display_contacts
     @rolodex.all.each do |contact|
@@ -88,4 +107,3 @@ CRM.run("Bitmaker CRM")
 # personal_crm = CRM.new("Personal CRM")
 
 # bm_name = bitmaker_crm.name
-# bitmaker_crm.name = "Something new"

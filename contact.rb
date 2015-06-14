@@ -10,5 +10,3 @@ class Contact
     @notes = notes
   end
 end
-
-    Status API Training Shop Blog About Help
