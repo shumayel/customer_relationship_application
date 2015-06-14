@@ -16,20 +16,22 @@ class CRM
   def print_main_menu
     puts "[1] Add a contact"
     puts "[2] Modify a contact"
-    puts "[3] Display all contacts"
-    puts "[4] Display an attribute"
-    puts "[5] Delete a contact"
-    puts "[6] Exit"
+    puts "[3] Display an attribute"
+    puts "[4] Display all contacts"
+    puts "[5] Display a specific contact"
+    puts "[6] Delete a contact"
+    puts "[7] Exit"
   end
 
   def choose_option(choice)
     case choice
     when 1 then add_contact
     when 2 then edit_contact
-    when 3 then display_contacts
-    when 4 then display_attribute
-    when 5 then delete_contact
-    when 6
+    when 3 then display_attribute
+    when 4 then display_contacts
+    when 5 then display_a_contact
+    when 6 then delete_contact
+    when 7
       puts "Goodbye"
       exit
     else
@@ -79,6 +81,24 @@ class CRM
   end
 
   def edit_contact_choice(attribute_edit)
+      puts "Are you sure you want to continue? Y/N."
+      selection = gets.chomp
+      if selection == "Y"
+        run_some_method
+        puts "Ok, I will continue with this change."
+      elsif selection == "N"
+        puts "Cancelling selection."
+        main_menu
+      else
+        "Please put Y or N only, in capital letters please."
+      end
+
+      def run_some_method
+        print "Please enter new values for First Name, Last Name, E-mail, and Note."
+        @rolodex.add_contact(first_name, last_name, email, notes)
+        puts "The contact has been added."
+      end
+
     case attribute_edit
     when 1 then edit_first_name
     when 2 then edit_last_name
@@ -96,16 +116,21 @@ class CRM
     end
   end
 
-  def display_attribute
-    @rolodex.all.each do |contact|
-      puts "#{contact.email}, #{contact.notes}"
-    end
+  def display_a_contact(specificcontact)
+specificcontact = @rolodex.each do |specificcontact|
+  puts "#{contact.specificcontact}"
   end
 
-  def delete_contact
-    puts "Which contact would you like to delete? Please write first and last name."
-    nametodelete = gets.chomp
-****FINISH THIS***
+  def display_attribute
+    puts "Which attribute category would you like to organize the contacts by? First Name? Last Name? E-mail? Notes? Please be specific when entering value."
+    case attributeorg
+    when "First Name" then
+    when "Last Name" then
+    when "E-mail" then
+    when "Notes" then
+    else
+      "Dave, please type the options exactly as shown. Or else you get nothing."
+    end
   end
 end
 
