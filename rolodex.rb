@@ -14,6 +14,9 @@ class Rolodex
     @contacts << contact
   end
 
+  def delete_contact(first_name, last_name, email, note)
+  end
+
   def all
     @contacts
   end

@@ -79,23 +79,33 @@ class CRM
   end
 
   def edit_contact_choice(attribute_edit)
-  case attribute_edit
-  when 1 then edit_first_name
-  when 2 then edit_last_name
-  when 3 then edit_email
-  when 4 then edit_notes
-  when 5 then main_menu
-    else
-      puts "Dave, you don't know what you're doing."
-    end
+    case attribute_edit
+    when 1 then edit_first_name
+    when 2 then edit_last_name
+    when 3 then edit_email
+    when 4 then edit_notes
+    when 5 then main_menu
+      else
+        puts "Dave, you don't know what you're doing."
+      end
   end
-
-
 
   def display_contacts
     @rolodex.all.each do |contact|
       puts "#{contact.first_name} #{contact.last_name}"
     end
+  end
+
+  def display_attribute
+    @rolodex.all.each do |contact|
+      puts "#{contact.email}, #{contact.notes}"
+    end
+  end
+
+  def delete_contact
+    puts "Which contact would you like to delete? Please write first and last name."
+    nametodelete = gets.chomp
+****FINISH THIS***
   end
 end
 
