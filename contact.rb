@@ -9,4 +9,13 @@ class Contact
     @email = email
     @notes = notes
   end
+
+  def update(attribute, new_value)
+    if attribute == "First Name"
+      self.first_name = new_value
+    elsif attribute == "Last Name"
+      self.last_name = new_value
+    end
+  end
+
 end

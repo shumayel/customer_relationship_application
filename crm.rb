@@ -26,7 +26,7 @@ class CRM
   def choose_option(choice)
     case choice
     when 1 then add_contact
-    when 2 then edit_contact
+    when 2 then edit_contact_choice
     when 3 then display_attribute
     when 4 then display_contacts
     when 5 then display_a_contact
@@ -80,34 +80,40 @@ class CRM
     puts "[5] Back to Main Menu"
   end
 
-  def edit_contact_choice(attribute_edit)
-      puts "Are you sure you want to continue? Y/N."
-      selection = gets.chomp
-      if selection == "Y"
-        run_some_method
-        puts "Ok, I will continue with this change."
-      elsif selection == "N"
-        puts "Cancelling selection."
-        main_menu
-      else
-        "Please put Y or N only, in capital letters please."
-      end
 
-      def run_some_method
-        print "Please enter new values for First Name, Last Name, E-mail, and Note."
-        @rolodex.add_contact(first_name, last_name, email, notes)
-        puts "The contact has been added."
-      end
+  def edit_contact_choice
+    puts "Are you sure you want to continue? Y/N."
+    selection = gets.chomp
+    if selection == "Y"
+      puts "Which ID would you like to edit?"
+      whichid = gets.chomp
+      contact_to_edit = @rolodex.find_contact(whichid)
+      puts "Please enter the attribute you wish to modify."
+      attribute = gets.chomp
+      puts "Please enter the new value."
+      new_value = gets.chomp
+      # contact_to_edit.first_name = new_first_name
+      contact_to_edit.update(attribute, new_value)
+      puts contact_to_edit.inspect
+    elsif selection == "N"
+      puts "Cancelling selection."
+      main_menu
+    else
+      "Please put Y or N only, in capital letters please."
+    end
+  end
 
-    case attribute_edit
-    when 1 then edit_first_name
-    when 2 then edit_last_name
-    when 3 then edit_email
-    when 4 then edit_notes
-    when 5 then main_menu
-      else
-        puts "Dave, you don't know what you're doing."
-      end
+  def delete_contact
+    print "What contact ID would you like to delete permanently?"
+    whichid = gets.chomp
+    @rolodex.delete_contact(whichid)
+    puts "Contact deleted."
+  end
+
+  def run_edit_choice
+    print "Please enter new values for First Name, Last Name, E-mail, and Note."
+    @rolodex.add_contact(first_name, last_name, email, notes)
+    puts "The contact has been added."
   end
 
   def display_contacts
@@ -116,29 +122,27 @@ class CRM
     end
   end
 
-  def display_a_contact(specificcontact)
-specificcontact = @rolodex.each do |specificcontact|
-  puts "#{contact.specificcontact}"
+  def display_a_contact
+    puts "Which ID would you like to display?"
+    whichid = gets.chomp
+    contact = @rolodex.find_contact(whichid)
+    puts contact.inspect
   end
 
   def display_attribute
     puts "Which attribute category would you like to organize the contacts by? First Name? Last Name? E-mail? Notes? Please be specific when entering value."
-    case attributeorg
-    when "First Name" then
-    when "Last Name" then
-    when "E-mail" then
-    when "Notes" then
-    else
-      "Dave, please type the options exactly as shown. Or else you get nothing."
-    end
+    category = gets.chomp
+    puts @rolodex.display_by_attribute(category)
   end
+
 end
+
 
 CRM.run("Bitmaker CRM")
 
-# CRM.run
+CRM.run
 
-# bitmaker_crm = CRM.new("Bitmaker CRM")
-# personal_crm = CRM.new("Personal CRM")
+bitmaker_crm = CRM.new("Bitmaker CRM")
+personal_crm = CRM.new("Personal CRM")
 
-# bm_name = bitmaker_crm.name
+bm_name = bitmaker_crm.name("Shumayel", "Khan")
