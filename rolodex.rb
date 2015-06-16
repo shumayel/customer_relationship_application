@@ -49,8 +49,11 @@ class Rolodex
       # else
       #   "Dave, please type the options exactly as shown. Or else you get nothing."
       end
+
     end
+
     return results
+
   end
 
   def all
